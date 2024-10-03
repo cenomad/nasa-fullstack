@@ -1,17 +1,30 @@
 const express = require('express')
 const app = express()
 
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
 const baseApiUrl = "https://api.nasa.gov/planetary/apod"
 var fullURL = ""
 var key = ""
 
 const fs = require("fs")
-fs.readFile("apiKey.txt", { encoding: "utf8" }, (err, data) => {
-    if (err) {
-        console.log(err)
-    }
-    key = data
-})
+if (fs.existsSync('apiKey.txt')) {
+    fs.readFile("apiKey.txt", { encoding: "utf8" }, (err, data) => {
+        if (err) {
+            console.log(err)
+        }
+        key = data
+    })
+} else {
+    readline.question("apiKey.txt file is missing. If you have a NASA api key, please paste it here: ", apiKey => {
+        key = apiKey
+        readline.close()
+    })
+}
+
 
 let id = 1
 
@@ -39,39 +52,40 @@ app.get("/data", (req, res) => {
     // Fetching the data
     let getData = async () => {
         return fetch(fullURL)
-            .then(response => {
-                if (!response.ok) {
-                    res.status(500).json({err:"Could not fetch data from api"})
-                }
-                return response.json()
-            })
+            .then(response => response.json())
             .then(response => response)
             .catch(err => err);
     }
     (async () => {
         let data = await getData();
         const finalData = []
-        if (data.hasOwnProperty("date")) {
+
+        if (data.hasOwnProperty("error")) {
+            res.send({ "err": data.error.message })
+        } else if (data.hasOwnProperty("msg")) {
+            res.send({ "err": data.msg })
+        } else if (data.hasOwnProperty("date")) {
             addToList(data, finalData)
+            res.send(JSON.stringify(finalData))
         } else {
-            for (let i=0; i<data.length;i++) {
+            for (let i = 0; i < data.length; i++) {
                 addToList(data[i], finalData)
             }
+            res.send(JSON.stringify(finalData))
         }
-        res.send(JSON.stringify(finalData))
     })();
 
 })
 
 function addToList(apod, list) {
     list.push({
-        id:id,
+        id: id,
         date: apod.date,
         title: apod.title,
         explanation: apod.explanation,
         media_type: apod.media_type,
         url: apod.url,
-        copyright:apod.copyright
+        copyright: apod.copyright
     })
     id++
 }
