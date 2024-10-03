@@ -1,0 +1,35 @@
+@media (min-width: 300px) {
+    .video-style {
+        height: 10rem;
+    }
+  }
+
+  @media (min-width: 400px) {
+    .video-style {
+        height: 15rem;
+    }
+  }
+
+@media (min-width: 500px) {
+    .video-style {
+        height: 20rem;
+    }
+  }
+
+  @media (min-width: 700px) {
+    .video-style {
+        height: 25rem;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .video-style {
+        height: 35rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .video-style {
+        height: 30rem;
+    }
+  }
