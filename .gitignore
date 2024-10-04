@@ -3,5 +3,4 @@
 
 # server
 /server/node_modules
-# /server/apiKey.txt
-# /server/vercel.json
+/server/.env

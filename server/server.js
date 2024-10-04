@@ -1,36 +1,23 @@
 const express = require('express')
 const app = express()
 
+const dotenv = require('dotenv').config();
+apiKey = process.env.API_KEY
 const baseApiUrl = "https://api.nasa.gov/planetary/apod"
 var fullURL = ""
-var key = ""
-
-const fs = require("fs")
-if (fs.existsSync('apiKey.txt')) {
-    fs.readFile("apiKey.txt", { encoding: "utf8" }, (err, data) => {
-        if (err) {
-            console.log(err)
-        }
-        key = data
-    })
-}
-
 
 let id = 1
+
 app.get("/", (req, res) => {
-    res.send({"err":"path not correct for api data"})
+    res.send({ "err": "api data not here" })
 })
+
 app.get("/data", (req, res) => {
-    // Checking if the key was extracted from the apiKey file
-    console.log("Checking apiKey file...")
-    if (key == "") {
-        res.status(500).json({ "err": "apiKeyFile is missing or something wrong with the file" })
-        console.log("Key was not extracted. Something wrong with the file, possibly missing.")
+    // Get API_KEY value and construct url
+    if (typeof apiKey === "undefined") {
+        res.send({ "err": "you need an API_KEY to fetch data" })
     } else {
-        // Constructing the api url using the api key
-        console.log("Key ok!")
-        fullURL = baseApiUrl + "?api_key=" + key
-        console.log("URL being used: " + fullURL)
+        fullURL = baseApiUrl + "?api_key=" + apiKey
     }
 
     // Checking for query parameters
