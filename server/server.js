@@ -1,11 +1,6 @@
 const express = require('express')
 const app = express()
 
-const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
 const baseApiUrl = "https://api.nasa.gov/planetary/apod"
 var fullURL = ""
 var key = ""
@@ -18,28 +13,25 @@ if (fs.existsSync('apiKey.txt')) {
         }
         key = data
     })
-} else {
-    readline.question("apiKey.txt file is missing. If you have a NASA api key, please paste it here: ", apiKey => {
-        key = apiKey
-        readline.close()
-    })
 }
 
 
 let id = 1
-
+app.get("/", (req, res) => {
+    res.send({"err":"path not correct for api data"})
+})
 app.get("/data", (req, res) => {
     // Checking if the key was extracted from the apiKey file
     console.log("Checking apiKey file...")
     if (key == "") {
-        res.status(500).json({ "err": "Something wrong with the file" })
+        res.status(500).json({ "err": "apiKeyFile is missing or something wrong with the file" })
         console.log("Key was not extracted. Something wrong with the file, possibly missing.")
+    } else {
+        // Constructing the api url using the api key
+        console.log("Key ok!")
+        fullURL = baseApiUrl + "?api_key=" + key
+        console.log("URL being used: " + fullURL)
     }
-
-    // Constructing the api url using the api key
-    console.log("Key ok!")
-    fullURL = baseApiUrl + "?api_key=" + key
-    console.log("URL being used: " + fullURL)
 
     // Checking for query parameters
     if (req.query.hasOwnProperty("date")) {
@@ -91,3 +83,4 @@ function addToList(apod, list) {
 }
 
 app.listen(5000)
+module.exports = app
