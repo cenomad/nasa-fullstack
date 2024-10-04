@@ -1,11 +1,6 @@
 const express = require('express')
 const app = express()
 
-const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
 const baseApiUrl = "https://api.nasa.gov/planetary/apod"
 var fullURL = ""
 var key = ""
@@ -18,11 +13,6 @@ if (fs.existsSync('apiKey.txt')) {
         }
         key = data
     })
-} else {
-    readline.question("apiKey.txt file is missing. If you have a NASA api key, please paste it here: ", apiKey => {
-        key = apiKey
-        readline.close()
-    })
 }
 
 
@@ -34,12 +24,12 @@ app.get("/data", (req, res) => {
     if (key == "") {
         res.status(500).json({ "err": "Something wrong with the file" })
         console.log("Key was not extracted. Something wrong with the file, possibly missing.")
+    } else {
+        // Constructing the api url using the api key
+        console.log("Key ok!")
+        fullURL = baseApiUrl + "?api_key=" + key
+        console.log("URL being used: " + fullURL)
     }
-
-    // Constructing the api url using the api key
-    console.log("Key ok!")
-    fullURL = baseApiUrl + "?api_key=" + key
-    console.log("URL being used: " + fullURL)
 
     // Checking for query parameters
     if (req.query.hasOwnProperty("date")) {
