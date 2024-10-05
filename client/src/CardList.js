@@ -6,7 +6,8 @@ const CardList = (props) => {
     useEffect(() => {
         fetch("/data" + props.query)
             .then((res) => res.json())
-            .then((data) => setApiData(data));
+            .then((data) => setApiData(data))
+            .catch(err => err);
     }, [props.query]);
     console.log(apiData)
     return (
