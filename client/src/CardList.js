@@ -8,6 +8,7 @@ const CardList = (props) => {
             .then((res) => res.json())
             .then((data) => setApiData(data));
     }, [props.query]);
+    console.log(apiData)
     return (
         <div className="row justify-content-center">
             <div className="col-xl-8">
