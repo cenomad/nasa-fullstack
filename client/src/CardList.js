@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 const CardList = (props) => {
     const [apiData, setApiData] = useState([]);
     useEffect(() => {
-        fetch("https://nasa-fullstack.vercel.app/data" + props.query)
+        fetch("https://nasa-apod-backend-ejoantfrs-cenomads-projects.vercel.app/data" + props.query)
             .then((res) => res.json())
             .then((data) => setApiData(data))
             .catch(err => {

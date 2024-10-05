@@ -15,10 +15,12 @@ var fullURL = ""
 let id = 1
 
 app.get("/", (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*")
     res.status(500).send({ "err": "api data not here" })
 })
 
 app.get("/data", (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*")
     // Get API_KEY value and construct url
     if (typeof apiKey === "undefined") {
         res.status(500).send({ "err": "you need an API_KEY to fetch data" })
