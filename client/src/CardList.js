@@ -2,14 +2,12 @@ import "./style.css"
 import 'bootstrap/dist/css/bootstrap.css';
 import { useState, useEffect } from 'react';
 const CardList = (props) => {
-    console.log(props)
     const [apiData, setApiData] = useState([]);
     useEffect(() => {
         fetch("https://nasa-apod-backend-gxi2jt5gi-cenomads-projects.vercel.app/data" + props.query)
             .then((res) => res.json())
             .then((data) => setApiData(data))
             .catch(err => {
-                console.log(err)
                 setApiData({"err":"Could not connect to backend server"})
             });
     }, [props.query]);
