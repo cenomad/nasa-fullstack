@@ -7,9 +7,11 @@ const CardList = (props) => {
         fetch("/data" + props.query)
             .then((res) => res.json())
             .then((data) => setApiData(data))
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err)
+                setApiData({"err":"Could not connect to backend server"})
+            });
     }, [props.query]);
-    console.log(apiData)
     return (
         <div className="row justify-content-center">
             <div className="col-xl-8">
