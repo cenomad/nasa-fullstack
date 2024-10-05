@@ -1,11 +1,5 @@
 const express = require('express')
 const app = express()
-const cors = require('cors');
-const corsOptions = {
-    origin: 'https://nasa-fullstack-delta.vercel.app/',
-    optionsSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
 
 const dotenv = require('dotenv').config();
 apiKey = process.env.API_KEY
@@ -20,7 +14,13 @@ app.get("/", (req, res) => {
 })
 
 app.get("/data", (req, res) => {
-    res.set("Access-Control-Allow-Origin", "*")
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    )
     // Get API_KEY value and construct url
     if (typeof apiKey === "undefined") {
         res.status(500).send({ "err": "you need an API_KEY to fetch data" })
