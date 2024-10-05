@@ -5,14 +5,8 @@ const CardList = (props) => {
     const [apiData, setApiData] = useState([]);
     useEffect(() => {
         fetch("/data" + props.query)
-            .then((res) => {
-                console.log(res)
-                res.json()
-            })
-            .then((data) => {
-                console.log(data)
-                setApiData(data)
-            });
+            .then((res) => res.json())
+            .then((data) => setApiData(data));
     }, [props.query]);
     return (
         <div className="row justify-content-center">
