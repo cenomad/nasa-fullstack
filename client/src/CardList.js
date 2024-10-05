@@ -7,7 +7,7 @@ const CardList = (props) => {
         fetch("/data" + props.query)
             .then((res) => res.json())
             .then((data) => setApiData(data))
-            .catch(err => err);
+            .catch(err => console.log(err));
     }, [props.query]);
     console.log(apiData)
     return (
