@@ -2,9 +2,10 @@ import "./style.css"
 import 'bootstrap/dist/css/bootstrap.css';
 import { useState, useEffect } from 'react';
 const CardList = (props) => {
+    console.log(props)
     const [apiData, setApiData] = useState([]);
     useEffect(() => {
-        fetch("/data" + props.query)
+        fetch("https://nasa-fullstack.vercel.app//data" + props.query)
             .then((res) => res.json())
             .then((data) => setApiData(data))
             .catch(err => {

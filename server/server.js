@@ -1,5 +1,11 @@
 const express = require('express')
 const app = express()
+const cors = require('cors');
+const corsOptions = {
+    origin: 'https://nasa-fullstack-delta.vercel.app/',
+    optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 const dotenv = require('dotenv').config();
 apiKey = process.env.API_KEY
