@@ -45,12 +45,12 @@ app.get("/data", (req, res) => {
             res.status(500).send({ "err": data.msg })
         } else if (data.hasOwnProperty("date")) {
             addToList(data, finalData)
-            res.status(200).send(JSON.stringify(finalData))
+            res.status(200).send({finalData})
         } else {
             for (let i = 0; i < data.length; i++) {
                 addToList(data[i], finalData)
             }
-            res.status(200).send(JSON.stringify(finalData))
+            res.status(200).send({finalData})
         }
     })();
 
