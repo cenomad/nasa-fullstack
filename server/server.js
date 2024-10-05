@@ -9,13 +9,13 @@ var fullURL = ""
 let id = 1
 
 app.get("/", (req, res) => {
-    res.send({ "err": "api data not here" })
+    res.status(500).send({ "err": "api data not here" })
 })
 
 app.get("/data", (req, res) => {
     // Get API_KEY value and construct url
     if (typeof apiKey === "undefined") {
-        res.send({ "err": "you need an API_KEY to fetch data" })
+        res.status(500).send({ "err": "you need an API_KEY to fetch data" })
     } else {
         fullURL = baseApiUrl + "?api_key=" + apiKey
     }
@@ -40,17 +40,17 @@ app.get("/data", (req, res) => {
         const finalData = []
 
         if (data.hasOwnProperty("error")) {
-            res.send({ "err": data.error.message })
+            res.status(500).send({ "err": data.error.message })
         } else if (data.hasOwnProperty("msg")) {
-            res.send({ "err": data.msg })
+            res.status(500).send({ "err": data.msg })
         } else if (data.hasOwnProperty("date")) {
             addToList(data, finalData)
-            res.send(JSON.stringify(finalData))
+            res.status(200).send(JSON.stringify(finalData))
         } else {
             for (let i = 0; i < data.length; i++) {
                 addToList(data[i], finalData)
             }
-            res.send(JSON.stringify(finalData))
+            res.status(200).send(JSON.stringify(finalData))
         }
     })();
 

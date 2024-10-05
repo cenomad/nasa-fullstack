@@ -3,14 +3,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useState, useEffect } from 'react';
 const CardList = (props) => {
     const [apiData, setApiData] = useState([]);
-
     useEffect(() => {
         fetch("/data" + props.query)
             .then((res) => {
                 return res.json();
             })
             .then((data) => {
-                console.log(data);
                 setApiData(data);
             });
     }, [props.query]);

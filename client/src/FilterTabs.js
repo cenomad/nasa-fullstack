@@ -65,7 +65,7 @@ export default function FilterTabs(props) {
                                     <BasicDatePicker setter={setDate} datePickerName="Date" />
                                 </div>
                                 <div className="col mt-sm-auto ml-sm-auto mt-4 text-end">
-                                    <button onClick={handleQueryDate} type="button" class="btn btn-primary btn-lg">Find APOD</button>
+                                    <button onClick={handleQueryDate} type="button" className="btn btn-primary btn-lg">Find APOD</button>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@ export default function FilterTabs(props) {
                                     <BasicDatePicker setter={setEndDate} datePickerName="End Date" />
                                 </div>
                                 <div className="col mt-sm-auto ml-sm-auto mt-4 text-end">
-                                    <button onClick={handleQueryDateRange} type="button" class="btn btn-primary btn-lg">Find APOD</button>
+                                    <button onClick={handleQueryDateRange} type="button" className="btn btn-primary btn-lg">Find APOD</button>
                                 </div>
                             </div>
                         </div>
