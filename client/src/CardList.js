@@ -5,7 +5,7 @@ const CardList = (props) => {
     console.log(props)
     const [apiData, setApiData] = useState([]);
     useEffect(() => {
-        fetch("https://nasa-fullstack.vercel.app//data" + props.query)
+        fetch("https://nasa-apod-backend-gxi2jt5gi-cenomads-projects.vercel.app/data" + props.query)
             .then((res) => res.json())
             .then((data) => setApiData(data))
             .catch(err => {
