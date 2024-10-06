@@ -42,7 +42,7 @@ export default function FilterTabs(props) {
         if (!(isValidDate(startDate) || isValidDate(endDate))) return
         const selectedStartDate = new Date(startDate)
         const selectedEndDate = new Date(endDate)
-        if (selectedStartDate >= selectedEndDate) {
+        if (selectedStartDate > selectedEndDate) {
             setAlertMsg("Start Date can't be after End Date. Please select a valid date range and try again")
             setAlertDisplayClass("")
             return
@@ -54,23 +54,23 @@ export default function FilterTabs(props) {
 
     return (
         <div className="row justify-content-center">
-            <div className="col-xl-8">
+            <div className="col-xl-8 col">
                 
                 <Tabs>
                     <TabList>
-                        <Tab>Search by Date</Tab>
-                        <Tab>Search by Date Range</Tab>
+                        <Tab>Date Search</Tab>
+                        <Tab>Date Range Search</Tab>
                     </TabList>
 
                     <TabPanel>
                         <div className='mx-3 mt-4 mb-5'>
-                            <h4 className="mb-3">Select a date and it will show you the APOD for that date</h4>
+                            <h5 className="mb-3">Select a date and press Find APOD to see the astronomy photo of the day.</h5>
                             <div className="row justify-content-between">
                                 <div className="col-sm-3">
                                     <BasicDatePicker setter={setDate} datePickerName="Date" />
                                 </div>
                                 <div className="col mt-sm-auto ml-sm-auto mt-4 text-end">
-                                    <button onClick={handleQueryDate} type="button" className="btn btn-primary btn-lg">Find APOD</button>
+                                    <button onClick={handleQueryDate} type="button" className="btn btn-dark btn-lg">Find APOD</button>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@ export default function FilterTabs(props) {
 
                     <TabPanel>
                         <div className='mx-3 mt-4 mb-5'>
-                            <h4 className="mb-3">Select a date and it will show you the APOD for that date</h4>
+                            <h5 className="mb-3">Select a start date and an end date, then press Find APOD to see the astronomy photo of the day for each date within the selected range.</h5>
                             <div className="row justify-content-between">
                                 <div className="col-sm-3">
                                     <BasicDatePicker setter={setStartDate} datePickerName="Start Date" />
@@ -87,7 +87,7 @@ export default function FilterTabs(props) {
                                     <BasicDatePicker setter={setEndDate} datePickerName="End Date" />
                                 </div>
                                 <div className="col mt-sm-auto ml-sm-auto mt-4 text-end">
-                                    <button onClick={handleQueryDateRange} type="button" className="btn btn-primary btn-lg">Find APOD</button>
+                                    <button onClick={handleQueryDateRange} type="button" className="btn btn-dark btn-lg">Find APOD</button>
                                 </div>
                             </div>
                         </div>

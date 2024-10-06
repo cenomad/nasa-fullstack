@@ -1,35 +1,81 @@
-@media (min-width: 300px) {
-    .video-style {
-        height: 10rem;
-    }
+@media (min-width: 320px) {
+  .media-height {
+    height: 10rem;
   }
+}
 
-  @media (min-width: 400px) {
-    .video-style {
-        height: 15rem;
-    }
+@media (min-width: 480px) {
+  .media-height {
+    height: 15rem;
   }
+}
 
-@media (min-width: 500px) {
-    .video-style {
-        height: 20rem;
-    }
+@media (min-width: 600px) {
+  .media-height {
+    height: 20rem;
   }
+}
 
-  @media (min-width: 700px) {
-    .video-style {
-        height: 25rem;
-    }
+@media (min-width: 768px) {
+  .media-height {
+    height: 20rem;
   }
+}
 
-  @media (min-width: 1000px) {
-    .video-style {
-        height: 35rem;
-    }
+@media (min-width: 1024px) {
+  .media-height {
+    height: 20rem;
   }
+}
 
-  @media (min-width: 1200px) {
-    .video-style {
-        height: 30rem;
-    }
+@media (min-width: 1280px) {
+  .media-height {
+    max-height: 15rem;
   }
+}
+
+@media (min-width: 1440px) {
+  .media-height {
+    max-height: 15rem;
+  }
+}
+
+.media-height {
+  object-fit: cover;
+}
+
+.clickable-text:hover {
+  text-decoration: underline;
+  cursor: grab;
+}
+
+.fullscreen-img-background {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: contain;
+  background-repeat: no-repeat no-repeat;
+  background-position: center center;
+  background-color: rgba(0, 0, 0, 0.918);
+}
+
+.fullscreen-img {
+  object-fit: relative;
+  height: 90%;
+  width: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fullscreen-img:hover {
+  cursor: grab;
+}
+
+.clickable-img {
+  cursor: grab;
+}
