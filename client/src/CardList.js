@@ -2,7 +2,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useState, useEffect } from 'react';
 import Card from "./Card.js";
 
-const serverURL = process.env.REACT_APP_SERVER_URL || "http://localhost:5000"
+// const serverURL = process.env.REACT_APP_SERVER_URL || "http://localhost:5000"
+const serverURL = "http://localhost:5000"
 const CardList = (props) => {
     const [apiData, setApiData] = useState([]);
 

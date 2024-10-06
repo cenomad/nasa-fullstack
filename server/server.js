@@ -1,26 +1,22 @@
 const express = require('express')
 const app = express()
-
 const dotenv = require('dotenv').config();
-apiKey = process.env.API_KEY
+const util = require("./util.js")
+
+apiKey = process.env.API_KEY 
 const baseApiUrl = "https://api.nasa.gov/planetary/apod"
 var fullURL = ""
-
-let id = 1
+let count = 1
 
 app.get("/", (req, res) => {
-    res.set("Access-Control-Allow-Origin", "*")
+    res.set(util.allowAccessControllHeaders())
     res.status(500).send({ "err": "api data not here" })
 })
 
 app.get("/data", (req, res) => {
-    res.setHeader('Access-Control-Allow-Credentials', true)
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-    )
+    // expose endpoint
+    res.set(util.allowAccessControllHeaders())
+
     // Get API_KEY value and construct url
     if (typeof apiKey === "undefined") {
         res.status(500).send({ "err": "you need an API_KEY to fetch data" })
@@ -36,6 +32,7 @@ app.get("/data", (req, res) => {
     } else if (req.query.hasOwnProperty("count")) {
         fullURL += `&count=${req.query.count}`
     }
+
     // Fetching the data
     let getData = async () => {
         return fetch(fullURL)
@@ -52,30 +49,20 @@ app.get("/data", (req, res) => {
         } else if (data.hasOwnProperty("msg")) {
             res.status(500).send({ "err": data.msg })
         } else if (data.hasOwnProperty("date")) {
-            addToList(data, finalData)
+            util.addToList(data, finalData, count)
+            count++
             res.status(200).send(finalData)
         } else {
             for (let i = 0; i < data.length; i++) {
-                addToList(data[i], finalData)
+                util.addToList(data[i], finalData, count)
+                count++
+                console.log(count)
             }
             res.status(200).send(finalData)
         }
     })();
 
 })
-
-function addToList(apod, list) {
-    list.push({
-        id: id,
-        date: apod.date,
-        title: apod.title,
-        explanation: apod.explanation,
-        media_type: apod.media_type,
-        url: apod.url,
-        copyright: apod.copyright
-    })
-    id++
-}
 
 app.listen(5000)
 module.exports = app
