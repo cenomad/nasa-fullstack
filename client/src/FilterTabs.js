@@ -11,6 +11,7 @@ export default function FilterTabs(props) {
     const [alertDisplayClass, setAlertDisplayClass] = useState("d-none")
     const [alertMsg, setAlertMsg] = useState("")
 
+    // Check if date selected is valid == not in the future or before 1995
     const isValidDate = (dateValue) => {
         const firstAvailableDate = new Date("1995-06-16")
         const today = new Date()
@@ -28,6 +29,7 @@ export default function FilterTabs(props) {
         return true
     }
 
+    // update query and alert box for first tab using "date" param
     const handleQueryDate = () => {
         if (!isValidDate(date)) return
         const query = "?date=" + date
@@ -35,6 +37,7 @@ export default function FilterTabs(props) {
         setAlertDisplayClass("d-none")
     }
 
+    // update query and alert box for second tab using "start_date" and "end_date" params
     const handleQueryDateRange = () => {
         if (!(isValidDate(startDate) || isValidDate(endDate))) return
         const selectedStartDate = new Date(startDate)
@@ -48,9 +51,11 @@ export default function FilterTabs(props) {
         props.setter(query)
         setAlertDisplayClass("d-none")
     }
+
     return (
         <div className="row justify-content-center">
             <div className="col-xl-8">
+                
                 <Tabs>
                     <TabList>
                         <Tab>Search by Date</Tab>
@@ -59,7 +64,7 @@ export default function FilterTabs(props) {
 
                     <TabPanel>
                         <div className='mx-3 mt-4 mb-5'>
-                            <h3 className="mb-3">Select a date and it will show you the POTD for that date</h3>
+                            <h4 className="mb-3">Select a date and it will show you the APOD for that date</h4>
                             <div className="row justify-content-between">
                                 <div className="col-sm-3">
                                     <BasicDatePicker setter={setDate} datePickerName="Date" />
@@ -70,9 +75,10 @@ export default function FilterTabs(props) {
                             </div>
                         </div>
                     </TabPanel>
+
                     <TabPanel>
                         <div className='mx-3 mt-4 mb-5'>
-                            <h3 className="mb-3">Select a date and it will show you the POTD for that date</h3>
+                            <h4 className="mb-3">Select a date and it will show you the APOD for that date</h4>
                             <div className="row justify-content-between">
                                 <div className="col-sm-3">
                                     <BasicDatePicker setter={setStartDate} datePickerName="Start Date" />
@@ -87,9 +93,11 @@ export default function FilterTabs(props) {
                         </div>
                     </TabPanel>
                 </Tabs>
+
                 <div className={"alert alert-warning mt-3 " + alertDisplayClass} role="alert">
                     {alertMsg}
                 </div>
+                
             </div>
         </div>
 
