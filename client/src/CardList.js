@@ -19,6 +19,7 @@ const CardList = (props) => {
                         key={apod.id} 
                         showFullscreenImage={showFullscreenImage}
                         changeSelectedImage={changeSelectedImage}
+                        multipleApods={props.apiData.length > 1}
                         />
                     ))}
                     </div>}

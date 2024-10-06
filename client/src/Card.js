@@ -18,17 +18,18 @@ const Card = (props) => {
             title: props.data.title
         })
     }
-
+    // const mediaHeight = props.multipleApods ? "media-height" : "media-height-lg"
+    const colWidth = props.multipleApods ? "col-lg-6" : "col-12"
 
     return (
-        <div className="col-lg-6 pb-4">
+        <div className={colWidth + " pb-4"}>
             <div className="card bg-light h-100">
                 {props.data.media_type === "image"
-                    ? <img className="card-img-top media-height clickable-img"
+                    ? <img className="card-img-top clickable-img media-height"
                         src={props.data.url} alt={props.data.title}
                         onClick={showFullscreenImage} />
                     : <div className="embed-responsive embed-responsive-16by9 text-center">
-                        <iframe title={props.data.title} className="embed-responsive-item w-100 media-height" src={props.data.url} allowfullscreen></iframe>
+                        <iframe title={props.data.title} className="embed-responsive-item w-100 media-height" src={props.data.url} allowFullScreen></iframe>
                     </div>
                 }
                 <div className="card-body">
