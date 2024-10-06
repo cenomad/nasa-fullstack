@@ -17,6 +17,7 @@ Ensure you have the following installed on your system:
 
 - **Node.js**: Download and install from [Node.js official website](https://nodejs.org/en).
 - **React**: React will be installed as part of the `npm install` process in the `client` folder. You don't need to install React globally, but ensure your system supports it by having a compatible version of Node.js and npm.
+- **NASA API Key**: You need to sign up for an API key to use the NASA API (steps below).
 
 ## Getting a NASA API Key
 To use this project, you need a NASA API key:
@@ -46,13 +47,19 @@ cd server
 npm install
 ```
 
-### 2. Run the Application
+### 2. Set-up the api key
+Create a `.env` file inside the `server` folder and define the following environment variable:
+```
+API_KEY=your_nasa_api_key
+```
+
+### 3. Run the Application
 
 **Running the Server (Node.js)**
 
 In the `server` folder, run the following command to start the back-end server (hosted on port 5000):
 ```
-node server
+npm run dev
 ```
 **Running the Client (React)**
 
@@ -67,5 +74,5 @@ npm start
 
 ## Project Notes
 
-- Ensure the `apiKey.txt` file is placed in the server folder before starting the server.
-- Both the front-end and back-end must be running simultaneously for the application to function correctly.
+- Ensure the `.env` file is set up correctly in the `server` folder.
+- Both the front-end and back-end must be running simultaneously for the application to function properly.
