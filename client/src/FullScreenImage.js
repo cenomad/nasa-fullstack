@@ -9,9 +9,11 @@ const FullScreenImage = (props) => {
 
     return (
         <div className={props.displayImage + " fullscreen-img-background text-center h-100"} onClick={setDisplayNone}>
-            <img src={props.url} className="fullscreen-img" alt={props.title} />
+            <div className="grid">
+                <img src={props.url} className="fullscreen-img" alt={props.title} />
+            </div>
         </div>
     );
 }
- 
+
 export default FullScreenImage;
